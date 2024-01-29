@@ -2,16 +2,14 @@ pipeline {
  agent {
     docker {
       image 'maven:3.9.0-eclipse-temurin-17-alpine'
-      copy {
-                from './time'
-                into '/app'
-            }
     }
   }
   stages {
     stage('Copy project files') {
       steps {
-        sh "cp . /app"
+        docker.image('maven:3.9.0-eclipse-temurin-17-alpine').inside {
+                        sh 'cp -r /time /app'
+                    }
       }
     }
     stage('Build') {
