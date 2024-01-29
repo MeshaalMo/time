@@ -21,11 +21,11 @@ pipeline {
         sh "cd /app && mvn test"
       }
     }
-    stage('Deploy') {
-      steps {
-        // // Implement your deployment logic here, e.g., using a deployment plugin
-        // sh "cp /app/target/my-app.jar /deployment/path"
-      }
-    }
+    // stage('Deploy') {
+    //   steps {
+    //     // // Implement your deployment logic here, e.g., using a deployment plugin
+    //     // sh "cp /app/target/my-app.jar /deployment/path"
+    //   }
+    // }
   }
 }
