@@ -2,24 +2,19 @@ pipeline {
  agent {
     docker {
       image 'maven:3.9.0-eclipse-temurin-17-alpine'
+      args '-v ${PWD}:/usr/src/app -w /usr/src/app'
+      reuseNode true
     }
   }
   stages {
-    stage('Copy project files') {
-      steps {
-        docker.image('maven:3.9.0-eclipse-temurin-17-alpine').inside {
-                        sh 'cp -r /time /app'
-                    }
-      }
-    }
     stage('Build') {
       steps {
-        sh "cd /app && mvn clean package"
+        sh "mvn clean package"
       }
     }
     stage('Test') {
       steps {
-        sh "cd /app && mvn test"
+        sh "mvn test"
       }
     }
     // stage('Deploy') {
