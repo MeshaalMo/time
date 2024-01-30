@@ -2,7 +2,7 @@ pipeline {
  agent {
     docker {
       image 'maven:3.9.0-eclipse-temurin-17-alpine'
-      args '-v ${PWD}/:/usr/src/app -w /usr/src/app'
+      args '-v ${PWD}/:/usr/src/app -w /usr/src/app -v /var/run/docker.sock:/var/run/docker.sock'
       reuseNode true
     }
   }
@@ -17,11 +17,11 @@ pipeline {
         sh "mvn test"
       }
     }
-    // stage('Deploy') {
-    //   steps {
-    //     // // Implement your deployment logic here, e.g., using a deployment plugin
-    //     // sh "cp /app/target/my-app.jar /deployment/path"
-    //   }
-    // }
+    stage('Deploy') {
+
+      steps {
+        sh "docker build -t first-image ."
+      }
+    }
   }
 }
