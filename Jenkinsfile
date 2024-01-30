@@ -2,7 +2,7 @@ pipeline {
  agent {
     docker {
       image 'maven:3.9.0-eclipse-temurin-17-alpine'
-      args '-v ${PWD}:/usr/src/app -w /usr/src/app'
+      args '-v ${PWD}/:/usr/src/app -w /usr/src/app'
       reuseNode true
     }
   }
